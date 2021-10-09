@@ -1,0 +1,48 @@
+<div class="container">
+    <router-outlet></router-outlet>
+    <ng-template [ngIf]="!updateTask">
+        <app-taskform></app-taskform>
+        <div class="w-100">
+            <button (click)="getData()" class="btn btn-success">Refresh Data</button>
+        </div>
+        <div class="py-5">
+            <div class="border border-primary rounded p-3">
+                <table class="table border">
+                    <thead>
+                        <tr>
+                            <th class="align-middle text-center">ID</th>
+                            <th class="align-middle text-center">Title</th>
+                            <th class="align-middle text-center">Description</th>
+                            <th class="align-middle text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template [ngIf]="tasksloading" [ngIfElse]="loading">
+                            <ng-template [ngIf]="tasks && tasks.length > 0" [ngIfElse]="norecord">
+                                <tr *ngFor="let task of tasks">
+                                    <td class="align-middle text-center">{{ task.id }}</td>
+                                    <td class="align-middle text-center">{{ task.title }}</td>
+                                    <td class="align-middle text-center">{{ task.description }}</td>
+                                    <td class="align-middle text-center">
+                                        <button class="btn btn-primary" (click)="updateHideData()" [routerLink]="['/tasks/', task.id]">Edit</button>
+                                        <button class="btn btn-danger" (click)="delete(task)">Delete</button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template #norecord>
+                                <tr>
+                                    <td colspan="4" class="align-middle text-center">No Record!</td>
+                                </tr>
+                            </ng-template>
+                        </ng-template>
+                        <ng-template #loading>
+                            <tr>
+                                <td colspan="4" class="align-middle text-center">Loading...</td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-template>
+</div>
