@@ -29,11 +29,8 @@ export class ApiService {
   }
   updateTask(task:any, id:any) {
     const url:string = this.apiURL + '/api/tasks/' + id;
-    const formData:any = {
-      "title":task.title,
-      "description":task.description,
-      "_method":"PUT"
-    };
+    var formData:any = task;
+    formData._method = "PUT";
     /*
     Form Data have to set again and add the "_method" for endpoint "PUT or DELETE"
     */
