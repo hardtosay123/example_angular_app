@@ -11,7 +11,7 @@ const httpOptions ={
   providedIn: 'root'
 })
 export class ApiService {
-  apiURL:string = 'https://mrd001.oxford-diagnostics.com/testapi/public';
+  apiURL:string = 'https://api.oxford-diagnostics.com';
   
   constructor(private http: HttpClient) { }
 
@@ -30,17 +30,13 @@ export class ApiService {
   updateTask(task:any, id:any) {
     const url:string = this.apiURL + '/api/tasks/' + id;
     var formData:any = task;
-    formData._method = "PUT";
     /*
     Form Data have to set again and add the "_method" for endpoint "PUT or DELETE"
     */
-    return this.http.post(url, formData, httpOptions);
+    return this.http.put(url, formData, httpOptions);
   }
   deleteTask(id:number) {
     const url:string = this.apiURL + '/api/tasks/' + id;
-    const formData:any = {
-      "_method":"DELETE"
-    };
-    return this.http.post(url, formData, httpOptions);
+    return this.http.delete(url, httpOptions);
   }
 }
