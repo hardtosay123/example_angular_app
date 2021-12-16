@@ -11,7 +11,7 @@ const httpOptions ={
   providedIn: 'root'
 })
 export class ApiService {
-  apiURL:string = 'https://api.oxford-diagnostics.com';
+  apiURL:string = 'http://127.0.0.1:8000';
   
   constructor(private http: HttpClient) { }
 
